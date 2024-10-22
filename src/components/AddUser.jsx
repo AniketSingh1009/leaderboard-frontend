@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 const AddUser = ({ onUserAdded }) => {
   const [username, setUsername] = useState('');
-  
+
   const handleAddUser = async (e) => {
     e.preventDefault();
 
@@ -24,14 +24,15 @@ const AddUser = ({ onUserAdded }) => {
         body: JSON.stringify({ name: username }),
       });
 
+      console.log('Response status:', response.status); // Log the response status
+
       if (!response.ok) {
         throw new Error('Failed to register user');
       }
 
       const data = await response.json();
       
-      // Logging the data to make sure the response is correct
-      console.log('User added:', data);
+      console.log('User added:', data);  // Log the added user data
 
       // Trigger parent component to refresh the user list
       onUserAdded(data);

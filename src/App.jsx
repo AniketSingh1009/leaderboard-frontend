@@ -3,10 +3,10 @@ import UserSelection from './components/UserSelection';
 import ClaimPoints from './components/ClaimPoints';
 import Leaderboard from './components/Leaderboard';
 import AddUser from './components/AddUser';
+import History from './components/History';  // Import History component
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css'; // Import Tailwind CSS
-
 const App = () => {
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [claimedPoints, setClaimedPoints] = useState(null);
@@ -15,17 +15,13 @@ const App = () => {
   const [showLeaderboard, setShowLeaderboard] = useState(false);  // State to show/hide leaderboard
 
   // Fetch users when the component mounts
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/api/getuser');
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch('http://localhost:4000/api/getusers');
       const data = await response.json();
       setUsers(data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
+    };
 
-  useEffect(() => {
     fetchUsers();
   }, []);
 
@@ -39,13 +35,15 @@ const App = () => {
   };
 
   const handleUserAdded = (newUser) => {
-    console.log('New user added:', newUser);  // Debugging new user
-    setUsers((prevUsers) => [...prevUsers, newUser]);  // Refresh user list with the new user
+    console.log('New user added:', newUser); // Check if the new user is received
+    setUsers((prevUsers) => [...prevUsers, newUser]); // Add the new user to the list
     toast.success('User registered successfully!', {
       position: toast.POSITION.TOP_RIGHT,
       autoClose: 3000,
     });
   };
+  
+  
 
   const toggleLeaderboard = () => {
     setShowLeaderboard((prev) => !prev);  // Toggle leaderboard visibility
@@ -55,7 +53,7 @@ const App = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Leaderboard System</h1>
       <AddUser onUserAdded={handleUserAdded} />
-      <UserSelection onUserSelect={handleUserSelect} users={users} />
+      <UserSelection onUserSelect={handleUserSelect} />
       <ClaimPoints userId={selectedUserId} onClaim={handleClaim} />
       {claimedPoints && (
         <p className="mt-2 text-green-600">
@@ -75,6 +73,9 @@ const App = () => {
       {showLeaderboard && (
         <Leaderboard refresh={refreshLeaderboard} />
       )}
+
+      {/* Render History component */}
+      <History />
 
       {/* Toast Container */}
       <ToastContainer />
