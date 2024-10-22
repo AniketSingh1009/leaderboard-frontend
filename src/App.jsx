@@ -17,7 +17,7 @@ const App = () => {
   // Fetch users when the component mounts
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch('http://localhost:4000/api/getusers');
+      const response = await fetch('https://leaderboard-backend-qbmd-mqvisn721.vercel.app/getusers');
       const data = await response.json();
       setUsers(data);
     };

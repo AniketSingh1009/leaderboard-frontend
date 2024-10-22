@@ -16,7 +16,7 @@ const AddUser = ({ onUserAdded }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/adduser', {
+      const response = await fetch('https://leaderboard-backend-qbmd-mqvisn721.vercel.app/adduser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

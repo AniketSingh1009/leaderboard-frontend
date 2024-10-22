@@ -8,7 +8,7 @@ const History = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/claimhistory');
+        const response = await fetch('https://leaderboard-backend-qbmd-mqvisn721.vercel.app/claimhistory');
         if (!response.ok) {
           throw new Error('Failed to fetch history');
         }

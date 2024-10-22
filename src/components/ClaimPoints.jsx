@@ -2,7 +2,7 @@ import React from 'react';
 
 const ClaimPoints = ({ userId, onClaim }) => {
   const handleClaim = async () => {
-    const response = await fetch('http://localhost:4000/api/claimpoints', {
+    const response = await fetch('https://leaderboard-backend-qbmd-mqvisn721.vercel.app/claimpoints', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

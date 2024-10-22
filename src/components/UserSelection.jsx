@@ -5,7 +5,7 @@ const UserSelection = ({ onUserSelect }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch('http://localhost:4000/api/getuser');
+      const response = await fetch('https://leaderboard-backend-qbmd-mqvisn721.vercel.app/getuser');
       const data = await response.json();
       setUsers(data);
     };

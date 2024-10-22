@@ -5,7 +5,7 @@ const Leaderboard = ({ refresh }) => {
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
-      const response = await fetch('http://localhost:4000/api/leaderboard');
+      const response = await fetch('https://leaderboard-backend-qbmd-mqvisn721.vercel.app/leaderboard');
       const data = await response.json();
       setLeaderboard(data);
     };
